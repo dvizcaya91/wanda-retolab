@@ -5,7 +5,7 @@ import numpy as np
 
 def generate_data(request, n_registers):
 
-    c_date = datetime.datetime.now() - datetime.timedelta(days=n_registers/10)
+    c_date = datetime.datetime.now() - datetime.timedelta(days=365)
 
     for i in range(n_registers):
 
