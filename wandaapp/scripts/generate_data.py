@@ -32,7 +32,7 @@ def generate_data(request, n_registers):
             if category == 'Reuniones':
                 product = get_option(['Evento', 'Congreso', 'Reunion'], [0.3, 0.3, 0.4])
             else:
-                product = get_option(['Paseo ecológico', 'Cascadas', 'Avistsamiento de aves'], [0.3, 0.1, 0.6])
+                product = get_option(['Paseo ecológico', 'Cascadas', 'Aves'], [0.3, 0.1, 0.6])
 
             data = { 'date':(c_date+datetime.timedelta(days=d)).strftime('%Y-%m-%d'),
                      'category':category,
