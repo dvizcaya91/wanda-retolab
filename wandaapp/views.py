@@ -10,7 +10,7 @@ from wandaapp.scripts.OCR_image import async_detect_document, process_result
 from wandaapp.scripts.generate_data import generate_data
 
 
-def index(request):
+def descriptive(request):
 
     context = {}
     return render(request, 'wandaapp/dashboard-finance.html', context)
