@@ -9,8 +9,58 @@ from google.cloud import storage
 from wandaapp.scripts.OCR_image import async_detect_document, process_result
 from wandaapp.scripts.generate_data import generate_data
 import pandas as pd
-from django.db.models.functions import Cast, TruncDate
-from django.db.models import DateTimeField, CharField
+import numpy as np
+from sklearn.cluster import KMeans
+from sklearn import preprocessing
+from statsmodels.tsa.arima_model import ARIMA
+
+def predictive(request):
+
+    # Clusterization
+    df = pd.DataFrame(list(Transaction.objects.all().values('category', 'user_gender', 'companion_type', 'type_of_traveler')))
+
+    le_cat = preprocessing.LabelEncoder()
+    le_gender = preprocessing.LabelEncoder()
+    le_companion = preprocessing.LabelEncoder()
+    le_type = preprocessing.LabelEncoder()
+
+    le_cat.fit(df['category'])
+    le_gender.fit(df['user_gender'])
+    le_companion.fit(df['companion_type'])
+    le_type.fit(df['type_of_traveler'])
+
+    df['category'] = le_cat.transform(df['category'])
+    df['user_gender'] = le_gender.transform(df['user_gender'])
+    df['companion_type'] = le_companion.transform(df['companion_type'])
+    df['type_of_traveler'] = le_type.transform(df['type_of_traveler'])
+
+    kmeans = KMeans(n_clusters=5, random_state=0).fit(df)
+
+    centers = kmeans.cluster_centers_
+    centers = [[int(round(c)) for c in cl] for cl in centers]
+
+    for c in range(len(centers)):
+        centers[c][0] = le_cat.inverse_transform([centers[c][0]])[0]
+        centers[c][1] = le_gender.inverse_transform([centers[c][1]])[0]
+        centers[c][2] = le_companion.inverse_transform([centers[c][2]])[0]
+        centers[c][3] = le_type.inverse_transform([centers[c][3]])[0]
+
+
+    # Forecasting
+
+    df = pd.DataFrame(list(Transaction.objects.all().values()))
+    tourist_qty = df.groupby('date').aggregate({'user_id': 'count'}).reset_index().sort_values('date')
+    tourist_qty = np.asarray(tourist_qty['user_id']).astype('float32')
+    model = ARIMA(tourist_qty, order=(1, 1, 0))
+    model_fit = model.fit(disp=0)
+    prediction = model_fit.predict(start=1, end=100)
+
+    context = {'clusters':centers, 'tourism_qty':{'forecast':{'data':list(prediction), 'labels':range(len(list(prediction)))},
+                                                  'old':{'data':list(tourist_qty), 'labels':range(len(list(prediction)), len(list(prediction)+list(tourist_qty)))}}}
+    print(type(context['tourism_qty']['old']))
+
+    return render(request, 'wandaapp/dashboard-predictive.html', context)
+
 
 def descriptive(request):
 

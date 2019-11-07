@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('descriptive', views.descriptive, name='descriptive'),
+    path('predictive', views.predictive, name='predictive'),
     path('sales', views.sales, name='sales'),
     path('form', views.form, name='form'),
     path('crm', views.crm, name='crm'),
