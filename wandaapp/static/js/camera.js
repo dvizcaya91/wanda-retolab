@@ -50,6 +50,7 @@ function start() {
   }
 
   function takePhoto() {
+  $("#photo_btn").html("<div class='btn btn-primary'><img class='loading-img' src='static/images/loading.gif' /></div>")
   imageCapturer.takePhoto()
     .then((blob) => {
       console.log("Photo taken: " + blob.type + ", " + blob.size + "B")
@@ -71,4 +72,5 @@ function start() {
       console.error("takePhoto() failed: ", err);
     });*/
     )
+  window.location.replace('crm')
   }

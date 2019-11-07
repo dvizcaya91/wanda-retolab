@@ -30,7 +30,7 @@
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <img class="logo" src="{% static '/images/magic-wand.png' %}">
-                <a class="navbar-brand" href="../index.html">WANDA</a>
+                <a class="navbar-brand" href="upload">WANDA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -376,30 +376,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr>
+                                            {% for i in trans %}
+                                                <tr>
+                                                    <td>{{ i.date }}</td>
+                                                    <td>{{ i.user_id }}</td>
+                                                    <td>{{ i.product }}</td>
+                                                    <td>$ {{ i.price }}</td>
+                                                    <td>{{ i.sons_age }}</td>
+                                                    <td>{{ i.origin }}</td>
+                                                </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>

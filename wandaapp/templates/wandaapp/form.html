@@ -28,7 +28,7 @@
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <img class="logo" src="{% static '/images/magic-wand.png' %}">
-                <a class="navbar-brand" href="../index.html">WANDA</a>
+                <a class="navbar-brand" href="upload">WANDA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -359,9 +359,9 @@
                 <!-- instructions -->
                 <!-- ============================================================== -->
                 <p>Ingresa la información a continuación o toma una foto de la factura que contiene la información haciendo click aquí >>
-                    <a href="#"><i class="fa fa-camera"></i></a>
+                    <a href="camera"><i class="fa fa-camera"></i></a>
                 </p>
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" method="post" action="crm" novalidate>
                     <div class="row">
                         <!-- ============================================================== -->
                         <!-- Transaction information form -->
@@ -375,7 +375,7 @@
                                             <label>Fecha</label>
                                             <div class="form-group">
                                                 <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" />
+                                                    <input type="text" name="date" class="form-control datetimepicker-input" data-target="#datetimepicker4" />
                                                     <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                                     </div>
@@ -385,7 +385,7 @@
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 ">
                                             <label for="category-select">Categoría</label>
                                             <div class="input-group form-group">
-                                                <select class="form-control" id="category-select" required>
+                                                <select name="category" class="form-control" id="category-select" required>
                                                     <option disabled selected>-- Selecciona una opción --</option>
                                                     <option value="aventura">Aventura</option>
                                                     <option value="cultural">Cultural</option>
@@ -402,7 +402,7 @@
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                                             <label for="productName">Producto</label>
                                             <div class="input-group form-group">
-                                                <input type="text" class="form-control" id="productName" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input name="product" type="text" class="form-control" id="productName" placeholder="" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                     </div>
@@ -411,13 +411,13 @@
                                             <label for="price">Precio</label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                                                <input type="number" class="form-control" id="price" placeholder="0" required>
+                                                <input name="price" type="number" class="form-control" id="price" placeholder="0" required>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                                             <label for="location-select">Location</label>
                                             <div class="input-group form-group">
-                                                <select class="form-control" id="location-select" required>
+                                                <select name="location" class="form-control" id="location-select" required>
                                                     <option disabled selected>-- Selecciona una opción --</option>
                                                     <option value="aventura">Arauca</option>
                                                     <option value="cultural">Barranquilla</option>
@@ -446,13 +446,13 @@
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 ">
                                             <label for="idNumber">Número de Identificación</label>
                                             <div class="input-group form-group">
-                                                <input type="text" class="form-control" id="idNumber" placeholder="" aria-describedby="inputGroupPrepend" required>
+                                                <input name="user_id" type="text" class="form-control" id="idNumber" placeholder="" aria-describedby="inputGroupPrepend" required>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 ">
                                             <label for="reason-select">Motivo del Viaje</label>
                                             <div class="input-group form-group">
-                                                <select class="form-control" id="reason-select" required>
+                                                <select name="travel_reason" class="form-control" id="reason-select" required>
                                                     <option disabled selected>-- Selecciona una opción --</option>
                                                     <option value="aventura">Educación</option>
                                                     <option value="aventura">Trabajo / Negocios</option>
@@ -467,7 +467,7 @@
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 ">
                                             <label for="origin-select">Nacionalidad</label>
                                             <div class="input-group form-group">
-                                                <select class="form-control" id="origin-select" required>
+                                                <select name="origin" class="form-control" id="origin-select" required>
                                                     <option disabled selected>-- Selecciona una opción --</option>
                                                     <option value="Afghanistan">Afghanistan</option>
                                                     <option value="Åland Islands">Åland Islands</option>
@@ -730,13 +730,13 @@
                                             <br>
                                             <p class="radio-title">Género Viajero Principal</p>
                                             <label class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" name="radio-inline" checked="" class="custom-control-input"><span class="custom-control-label">Femenino</span>
+                                                <input type="radio" name="user_gender" value="f" checked="" class="custom-control-input"><span class="custom-control-label">Femenino</span>
                                             </label>
                                             <label class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" name="radio-inline" class="custom-control-input"><span class="custom-control-label">Masculino</span>
+                                                <input type="radio" name="user_gender" value="m" class="custom-control-input"><span class="custom-control-label">Masculino</span>
                                             </label>
                                             <label class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" name="radio-inline" class="custom-control-input"><span class="custom-control-label">Otro</span>
+                                                <input type="radio" name="user_gender" value="o" class="custom-control-input"><span class="custom-control-label">Otro</span>
                                             </label>
                                         </div>
                                     </div>
@@ -745,13 +745,13 @@
                                         <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                                             <label for="company-select">Tipo de Acompañante</label>
                                             <div class="input-group form-group">
-                                                <select class="form-control" id="company-select" required>
+                                                <select name="companion_type" class="form-control" id="company-select" required>
                                                     <option disabled selected>-- Selecciona una opción --</option>
-                                                    <option value="aventura">Amigos</option>
-                                                    <option value="cultural">Familia</option>
-                                                    <option value="cultural">Ninguno</option>
-                                                    <option value="naturaleza">Pareja</option>
-                                                    <option value="reuniones">Otro</option>
+                                                    <option value="amigos">Amigos</option>
+                                                    <option value="familia">Familia</option>
+                                                    <option value="ninguno">Ninguno</option>
+                                                    <option value="pareja">Pareja</option>
+                                                    <option value="otro">Otro</option>
                                                 </select>
                                                 <div class="input-group-append">
                                                     <div class="input-group-text"><i class="fas fa-caret-down"></i></div>
@@ -760,7 +760,7 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 mb-2">
                                             <label for="companyNumber">Número de Acompañantes</label>
-                                            <input type="number" class="form-control" id="companyNumber" placeholder="0" required>
+                                            <input name="sons_age" type="number" class="form-control" id="companyNumber" placeholder="0" required>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">

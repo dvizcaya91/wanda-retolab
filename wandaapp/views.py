@@ -34,6 +34,7 @@ def transaction_model(request):
 @csrf_exempt
 def form(request):
     context = {}
+
     return render(request, 'wandaapp/form.html', context)
 
 
@@ -70,13 +71,30 @@ def new_image(request):
 
     return JsonResponse({"success": True, "results":result})
 
+
 def populate_db(request):
     generate_data(request, 3)
 
     return JsonResponse({"success": True})
+
+
+@csrf_exempt
 def crm(request):
     context = {}
+
+    if request.method == 'POST':
+
+        form = dict(request.POST)
+        for key, i in form.items():
+            form[key] = i[0]
+        tran = Transaction(**form)
+        tran.save()
+
+    trans = list(Transaction.objects.all().order_by("-date").values())
+    context["trans"] = trans
+
     return render(request, 'wandaapp/crm.html', context)
+
 
 def upload(request):
     context = {}
