@@ -1964,6 +1964,10 @@ Container / Wrapper
     min-height: 870px !important;
 }
 
+.camera-wrapper {
+margin-left: 0px;
+}
+
 .dashboard-content {
     padding: 30px 30px 60px 30px;
 }
@@ -7019,7 +7023,6 @@ Media Query
     padding: 0 0 8% 0;
 
 }
-
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width:320px) {}

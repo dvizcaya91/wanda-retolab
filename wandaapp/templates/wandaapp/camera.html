@@ -3,9 +3,11 @@
  
 <head>
     <!-- Required meta tags -->
+    {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+    <title>Wanda</title>
+    <link rel='icon' href="{% static 'images/favicon.png' %}">
     <!-- Bootstrap CSS -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
@@ -26,11 +28,11 @@
         <!-- ============================================================== -->
          <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../index.html">Concept</a>
+                <img class="logo" src="{% static '/images/magic-wand.png' %}">
+                <a class="navbar-brand" href="../index.html">WANDA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
             </nav>
         </div>
         <!-- ============================================================== -->
@@ -46,10 +48,12 @@
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
-        <div class="dashboard-wrapper">
+        <div class="dashboard-wrapper camera-wrapper">
             <div class="container-fluid dashboard-content">
+                <h2 class="pageheader-title center">Captura tu Factura</h2>
+                <br>
                 <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 center">
 
                         <!--<p><button id="start" onclick="start()">start camera!</button></p>-->
                         <script>
@@ -60,17 +64,16 @@
                         </script>
 
                         <div>
-                         <div style="float:left;margin-right:5px;">
-                          <p><video id="video-tag" width="400" height="400" autoplay=true/></p>
+                         <div>
+                          <p><video id="video-tag" width="400" autoplay=true/></p>
                          </div>
-                         <div style="float:left">
+                         <div>
                           <p><img id="image-tag" width="400"> </img></p>
                          </div>
                         </div>
 
-                        <div style="width: 240px">
-                          <p><button onclick="takePhoto()">take photo</button></p>
-
+                        <div>
+                          <button class="btn btn-primary" onclick="takePhoto()">take photo</button>
                         </div>
                     </div>
                 </div>
@@ -83,13 +86,6 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                             Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
                         </div>
                     </div>
                 </div>
