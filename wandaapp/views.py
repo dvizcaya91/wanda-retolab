@@ -14,6 +14,7 @@ def index(request):
 
 @csrf_exempt
 def transaction_model(request):
+def form(request):
 
     if request.method == 'POST':
 
@@ -30,3 +31,6 @@ def transaction_model(request):
 
 
 
+
+    context = {}
+    return render(request, 'wandaapp/form.html', context)

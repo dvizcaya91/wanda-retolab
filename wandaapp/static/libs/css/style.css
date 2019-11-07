@@ -1241,10 +1241,10 @@ Top Header
     font-size: 30px;
     text-transform: uppercase;
     font-weight: 700;
-    color: #007bff;
+    color: #df2176;
 }
 .navbar-brand:hover{
-    color: #007bff;
+    color: #df2176;
 }
 .navbar-right-top {}
 
@@ -1261,6 +1261,11 @@ Top Header
     font-size: 16px;
     line-height: 2;
     color: #82849f;
+}
+
+.logo {
+    width: 40px;
+    margin-left: 2%;
 }
 
 
