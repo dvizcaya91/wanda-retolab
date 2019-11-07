@@ -1,0 +1,10 @@
+Factura
+Fecha: 6/11/2019
+Producto: Paseo Tayrona
+Precio: 30.000
+Ubicación: Magdalena
+Cédula: 1032 444591
+Geлeгo : H
+TIPO : Nacional
+Vlaga con: Familia
+Origen: Bogota
