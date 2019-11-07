@@ -103,12 +103,12 @@ def process_result(text):
         for t in text:
             if f in t:
                 if ':' in t:
-                    results[key] = t.split(':')[1]
+                    results[key] = t.split(':')[1].strip()
                 elif ' ':
-                    results[key] = t.split(' ')[1]
+                    results[key] = t.split(' ')[1].strip()
             elif get_close_matches(f, t.split(' ')):
                 results[key] = t.split(' ')[1:]
-                results[key] = ' '.join(results[key])
+                results[key] = ' '.join(results[key]).strip()
 
     if results.get('price'):
         results['price'] = ''.join(re.findall('\d+', results['price']))

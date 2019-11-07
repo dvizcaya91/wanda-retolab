@@ -55,7 +55,11 @@ function start() {
     .then((blob) => {
       console.log("Photo taken: " + blob.type + ", " + blob.size + "B")
       $("#photo_btn").html("<div class='btn btn-primary'><img class='loading-img' src='static/images/loading.gif' /></div>")
-      //imageTag.src = URL.createObjectURL(blob);
+
+      //var imageTag = document.getElementById('camera-tag');
+
+      $("#camera-tag").html("<img class='loading-img' src='" + URL.createObjectURL(blob) + "' />");
+
       var form = new FormData();
       form.append("myfile", blob);
 

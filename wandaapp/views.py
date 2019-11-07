@@ -183,7 +183,7 @@ def new_image(request):
 
         return JsonResponse({"success": True, "results":result})
     except Exception as e:
-        print(str(e))
+        print("FALLO", str(e))
         return JsonResponse({"success": False})
 
 
