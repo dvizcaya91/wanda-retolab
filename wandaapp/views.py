@@ -15,24 +15,56 @@ from django.db.models import DateTimeField, CharField
 def descriptive(request):
 
     df = pd.DataFrame(list(Transaction.objects.all().values()))
-    #df['date'] = df['date'].dt.strftime('%Y-%m-%d')
     df['date'] = df['date'].astype('str')
-    print(df)
-    print(df.dtypes)
+
+    # Tourists
+
     tourist_qty = df.groupby(['date', 'type_of_traveler']).aggregate({'user_id': 'count'}).reset_index()
-    print(tourist_qty)
-    print(tourist_qty.dtypes)
     tourist_qty = tourist_qty.pivot(index='date', columns='type_of_traveler', values='user_id').reset_index()
     tourist_qty = tourist_qty.fillna(0)
-    print(tourist_qty)
     tourist_qty = tourist_qty.to_dict()
-    print(tourist_qty)
     tourist_qty['date'] = list(tourist_qty['date'].values())
     tourist_qty['Internacional'] = list(tourist_qty['Internacional'].values())
     tourist_qty['Nacional'] = list(tourist_qty['Nacional'].values())
-    print(tourist_qty)
 
-    context = {'tourist_qty':tourist_qty}
+    tourist_summary = df.groupby(['type_of_traveler']).aggregate({'user_id': 'count'}).reset_index()
+    tourist_summary = tourist_summary.to_dict(orient='records')
+
+    # Products
+    products_bar = df.groupby(['type_of_traveler', 'product']).aggregate({'user_id': 'count'}).reset_index()
+    products_bar = products_bar.to_dict(orient='records')
+    products_bar_dict = {}
+    for i in products_bar:
+        if i['type_of_traveler'] not in products_bar_dict:
+            products_bar_dict[i['type_of_traveler']] = {'label':[], 'data':[]}
+        products_bar_dict[i['type_of_traveler']]['label'].append(i['product'])
+        products_bar_dict[i['type_of_traveler']]['data'].append(i['user_id'])
+
+    # Category
+    category_bar = df.groupby(['type_of_traveler', 'category']).aggregate({'user_id': 'count'}).reset_index()
+    category_bar = category_bar.to_dict(orient='records')
+    category_bar_dict = {}
+    for i in category_bar:
+        if i['type_of_traveler'] not in category_bar_dict:
+            category_bar_dict[i['type_of_traveler']] = {'label': [], 'data': []}
+        category_bar_dict[i['type_of_traveler']]['label'].append(i['category'])
+        category_bar_dict[i['type_of_traveler']]['data'].append(i['user_id'])
+
+    # Tipo de acompñante
+    companion_type = df.groupby(['companion_type']).aggregate({'user_id': 'count'}).reset_index()
+    companion_type = companion_type.rename(columns={'companion_type':'label', 'user_id':'value'})
+    companion_type = json.dumps(companion_type.to_dict(orient='records'))
+
+    # Average price
+    average_price = df.groupby(['date']).aggregate({'price': 'sum'}).reset_index()
+    average_price = average_price.to_dict()
+    average_price_dict = {}
+    average_price_dict['date'] = list(average_price['date'].values())
+    average_price_dict['values'] = list(average_price['price'].values())
+    average_price_dict['average'] = [sum(average_price_dict['values'])/len(average_price_dict['values']) for i in average_price_dict['values']]
+
+    context = {'tourist_qty':tourist_qty, 'tourist_summary':tourist_summary, 'products_bar_dict':products_bar_dict,
+               'category_bar_dict':category_bar_dict, 'companion_type':companion_type, 'average_price_dict':'average_price_dict'}
     return render(request, 'wandaapp/dashboard-finance.html', context)
 
 
