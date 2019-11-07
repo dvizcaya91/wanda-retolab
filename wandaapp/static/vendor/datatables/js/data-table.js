@@ -28,13 +28,13 @@ jQuery(document).ready(function($) {
 
         $(document).ready(function() {
             $(document).ready(function() {
-                var groupColumn = 2;
+                var groupColumn = 1;
                 var table = $('#example2').DataTable({
                     "columnDefs": [
                         { "visible": false, "targets": groupColumn }
                     ],
                     "order": [
-                        [groupColumn, 'asc']
+                        [groupColumn, 'desc']
                     ],
                     "displayLength": 25,
                     "drawCallback": function(settings) {

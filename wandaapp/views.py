@@ -34,7 +34,7 @@ def predictive(request):
     df['companion_type'] = le_companion.transform(df['companion_type'])
     df['type_of_traveler'] = le_type.transform(df['type_of_traveler'])
 
-    kmeans = KMeans(n_clusters=5, random_state=0).fit(df)
+    kmeans = KMeans(n_clusters=4, random_state=0).fit(df)
 
     centers = kmeans.cluster_centers_
     centers = [[int(round(c)) for c in cl] for cl in centers]
@@ -57,7 +57,7 @@ def predictive(request):
 
     context = {'clusters':centers, 'tourism_qty':{'forecast':{'data':list(prediction), 'labels':range(len(list(prediction)))},
                                                   'old':{'data':list(tourist_qty), 'labels':range(len(list(prediction)), len(list(prediction)+list(tourist_qty)))}}}
-    print(type(context['tourism_qty']['old']))
+    print(context)
 
     return render(request, 'wandaapp/dashboard-predictive.html', context)
 
@@ -202,10 +202,13 @@ def crm(request):
         form = dict(request.POST)
         for key, i in form.items():
             form[key] = i[0]
+            if key == 'date':
+                date = form[key].split('/')
+                form[key] = '{}-{}-{}'.format(date[2], date[0], date[1])
         tran = Transaction(**form)
         tran.save()
 
-    trans = list(Transaction.objects.all().order_by("-date").values())
+    trans = list(Transaction.objects.order_by("-date").all().values())
     context["trans"] = trans
 
     return render(request, 'wandaapp/crm.html', context)

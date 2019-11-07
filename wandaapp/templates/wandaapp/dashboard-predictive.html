@@ -110,12 +110,12 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h3 class="mb-2">Análisis Descriptivo </h3>
+                                <h3 class="mb-2">Análisis Predictivo </h3>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Análisis</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Descriptivo</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Predictivo</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -126,94 +126,40 @@
                     <!-- end pageheader  -->
                     <!-- ============================================================== -->
                     <div class="row">
-                        <div class="col-xl-8 col-lg-12 col-md-8 col-sm-12 col-12">
+                        {% for c in clusters %}
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 center">
                             <div class="card">
-                                <h5 class="card-header">Cantidad de Turistas</h5>
                                 <div class="card-body">
-                                    <canvas id="revenue" width="400" height="150"></canvas>
-                                </div>
-                                <div class="card-body border-top">
-                                    <div class="row">
-                                        <div class="offset-xl-1 col-xl-5 col-lg-3 col-md-6 col-sm-12 col-12 p-3">
-                                            <h2 class="font-weight-normal mb-3"><span>{{ tourist_summary.1.user_id }}</span>                                                    </h2>
-                                            <div class="mb-0 mt-3 legend-item">
-                                                <span class="fa-xs text-primary mr-1 legend-title "><i class="fa fa-fw fa-square-full"></i></span>
-                                                <span class="legend-text">Nacional</span></div>
-                                        </div>
-                                        <div class="offset-xl-1 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 p-3">
-                                            <h2 class="font-weight-normal mb-3">
-
-                                                            <span>{{ tourist_summary.0.user_id }}</span>
-                                                        </h2>
-                                            <div class="text-muted mb-0 mt-3 legend-item"> <span class="fa-xs text-secondary mr-1 legend-title"><i class="fa fa-fw fa-square-full"></i></span><span class="legend-text">Internacional</span></div>
-                                        </div>
-                                    </div>
+                                    <h3 class="card-title border-bottom pink">Cluster #{{forloop.counter}}</h3>
+                                    <p class="card-text card-clusters"><strong>Subsector: </strong>{{c.0}}</p>
+                                    <p class="card-text card-clusters"><strong>Género: </strong>{{c.1}}</p>
+                                    <p class="card-text card-clusters"><strong>Tipo de Viaje: </strong>{{c.2}}</p>
+                                    <p class="card-text card-clusters"><strong>Tipo de Turista: </strong>{{c.3}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Tipos de Turistas</h5>
-                                <div class="card-body">
-                                    <div id="morris_profit" style="height: 272px;"></div>
-                                </div>
-                                <div class="card-footer bg-white">
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="row">
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Productos más Populares</h5>
-                                <div class="card-body">
-                                    <canvas id="chartjs_balance_bar"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Subsectores más Populares</h5>
-                                <div class="card-body">
-                                    <canvas id="chartjs_balance_bar2"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <!-- ============================================================== -->
-                        <!-- disputed invoices  -->
-                        <!-- ============================================================== -->
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="card">
-                                <h5 class="card-header">Precio Promedio</h5>
+                                <h5 class="card-header">Cantidad de Turistas</h5>
                                 <div class="card-body">
                                     <div class="ct-chart-line-invoice ct-golden-section"></div>
                                     <div class="text-center m-t-10">
                                         <span class="legend-item mr-3">
                                                 <span class="fa-xs text-primary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Disputed Invoices</span>
+                                        <span class="legend-text">Nacionales</span>
                                         </span>
                                         <span class="legend-item mr-3">
                                                 <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Avarage</span>
+                                        <span class="legend-text">Internacionales</span>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- ============================================================== -->
-                        <!-- end disputed invoices  -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- inventory turnover  -->
-                        <!-- ============================================================== -->
-
                     </div>
-                    <!-- ============================================================== -->
-                    <!-- end inventory turnover -->
-                    <!-- ============================================================== -->
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -284,215 +230,12 @@
     <script>
         $(function() {
         "use strict";
-        // ==============================================================
-        // Revenue
-        // ==============================================================
-        var ctx = document.getElementById('revenue').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-
-                    data: {
-                        labels: {{ tourist_qty.date|safe }},
-                        datasets: [{
-                            label: 'Nacional',
-                            data: {{ tourist_qty.Nacional|safe }},
-                          backgroundColor: "rgba(89, 105, 255,0.5)",
-                                        borderColor: "rgba(89, 105, 255,0.7)",
-                                        borderWidth: 2
-
-                        }, {
-                            label: 'Internacional',
-                            data: {{ tourist_qty.Internacional|safe }},
-                              backgroundColor: "rgba(255, 64, 123,0.5)",
-                                        borderColor: "rgba(255, 64, 123,0.7)",
-                                        borderWidth: 2
-                        }]
-                    },
-                    options: {
-
-                                 legend: {
-                            display: true,
-                            position: 'bottom',
-
-                            labels: {
-                                fontColor: '#71748d',
-                                fontFamily: 'Circular Std Book',
-                                fontSize: 14,
-                            }
-                        },
-                        scales: {
-                yAxes: [{
-                    ticks: {
-                        // Include a dollar sign in the ticks
-                        callback: function(value, index, values) {
-                            return '$' + value;
-                        }
-                    }
-                }]
-            },
-
-
-             scales: {
-                                        xAxes: [{
-                                            ticks: {
-                                                fontSize: 14,
-                                                fontFamily: 'Circular Std Book',
-                                                fontColor: '#71748d',
-                                            }
-                                        }],
-                                        yAxes: [{
-                                            ticks: {
-                                                fontSize: 14,
-                                                fontFamily: 'Circular Std Book',
-                                                fontColor: '#71748d',
-                                            }
-                                        }]
-                                    }
-
-                    }
-                });
-
-        Morris.Donut({
-                element: 'morris_profit',
-
-                data: {{ companion_type | safe }},
-
-                labelColor: '#ff407b',
-
-
-                colors: [
-                    '#ff407b',
-                    '#ffd5e1'
-
-                ],
-
-                formatter: function(x) { return x },
-                  resize: true
-
-            });
-
-
-        var ctx = document.getElementById("chartjs_balance_bar").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-
-
-            data: {
-                labels: {{ products_bar_dict.Internacional.label | safe }},
-                datasets: [{
-                    label: 'Nacional',
-                    data: {{ products_bar_dict.Nacional.data | safe }},
-                    backgroundColor: "rgba(89, 105, 255,.8)",
-                    borderColor: "rgba(89, 105, 255,1)",
-                    borderWidth:2
-
-                }, {
-                    label: 'Internacional',
-                    data: {{ products_bar_dict.Internacional.data | safe }},
-                    backgroundColor: "rgba(255, 64, 123,.8)",
-                    borderColor: "rgba(255, 64, 123,1)",
-                    borderWidth:2
-
-
-                }]
-
-            },
-            options: {
-                legend: {
-                        display: true,
-
-                        position: 'bottom',
-
-                        labels: {
-                            fontColor: '#71748d',
-                            fontFamily:'Circular Std Book',
-                            fontSize: 14,
-                        }
-                },
-
-                    scales: {
-                        xAxes: [{
-                    ticks: {
-                        fontSize: 14,
-                         fontFamily:'Circular Std Book',
-                         fontColor: '#71748d',
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        fontSize: 14,
-                         fontFamily:'Circular Std Book',
-                         fontColor: '#71748d',
-                    }
-                }]
-                    }
-            }
-        });
-
-
-        var ctx = document.getElementById("chartjs_balance_bar2").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-
-
-            data: {
-                labels: {{ category_bar_dict.Internacional.label | safe }},
-                datasets: [{
-                    label: 'Nacional',
-                    data: {{ category_bar_dict.Nacional.data | safe }},
-                    backgroundColor: "rgba(89, 105, 255,.8)",
-                    borderColor: "rgba(89, 105, 255,1)",
-                    borderWidth:2
-
-                }, {
-                    label: 'Internacional',
-                    data: {{ category_bar_dict.Internacional.data | safe }},
-                    backgroundColor: "rgba(255, 64, 123,.8)",
-                    borderColor: "rgba(255, 64, 123,1)",
-                    borderWidth:2
-
-
-                }]
-
-            },
-            options: {
-                legend: {
-                        display: true,
-
-                        position: 'bottom',
-
-                        labels: {
-                            fontColor: '#71748d',
-                            fontFamily:'Circular Std Book',
-                            fontSize: 14,
-                        }
-                },
-
-                    scales: {
-                        xAxes: [{
-                    ticks: {
-                        fontSize: 14,
-                         fontFamily:'Circular Std Book',
-                         fontColor: '#71748d',
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        fontSize: 14,
-                         fontFamily:'Circular Std Book',
-                         fontColor: '#71748d',
-                    }
-                }]
-                    }
-            }
-        });
-
 
         new Chartist.Line('.ct-chart-line-invoice', {
-            labels: {{ average_price_dict.date | safe }},
+            labels: {{ tourism_qty.forecast.labels | safe }},
             series: [
-                {{ average_price_dict.values | safe }},
-                {{ average_price_dict.average | safe }}
+                {{ tourism_qty.forecast.data | safe }},
+                {{ tourism_qty.old.data | safe }}
 
             ]
         }, {
