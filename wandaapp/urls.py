@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('form', views.form, name='form'),
     path('crm', views.crm, name='crm'),
+    path('upload', views.upload, name='upload'),
     path('camera', views.camera, name='camera'),
     path('new-image', views.new_image, name='new-image'),
     path('api/new_transaction', views.transaction_model, name='new_transaction'),

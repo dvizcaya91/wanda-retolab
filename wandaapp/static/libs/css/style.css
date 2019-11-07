@@ -7006,7 +7006,19 @@ Media Query
     text-align: center !important;
 }
 
+.options {
+    justify-content: center;
+}
 
+.center {
+    text-align: center;
+}
+
+.icon-img {
+    width: 35%;
+    padding: 0 0 8% 0;
+
+}
 
 
 /* Custom, iPhone Retina */

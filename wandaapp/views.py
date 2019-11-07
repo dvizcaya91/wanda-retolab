@@ -77,3 +77,7 @@ def populate_db(request):
 def crm(request):
     context = {}
     return render(request, 'wandaapp/crm.html', context)
+
+def upload(request):
+    context = {}
+    return render(request, 'wandaapp/upload.html', context)
