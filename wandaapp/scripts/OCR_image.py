@@ -110,7 +110,9 @@ def process_result(text):
                 results[key] = t.split(' ')[1:]
                 results[key] = ' '.join(results[key])
 
-    results['price'] = ''.join(re.findall('\d+', results['price']))
+    if results.get('price'):
+        results['price'] = ''.join(re.findall('\d+', results['price']))
+
     print(results)
 
     return results

@@ -50,27 +50,32 @@ function start() {
   }
 
   function takePhoto() {
-  $("#photo_btn").html("<div class='btn btn-primary'><img class='loading-img' src='static/images/loading.gif' /></div>")
+
   imageCapturer.takePhoto()
     .then((blob) => {
       console.log("Photo taken: " + blob.type + ", " + blob.size + "B")
-
+      $("#photo_btn").html("<div class='btn btn-primary'><img class='loading-img' src='static/images/loading.gif' /></div>")
       //imageTag.src = URL.createObjectURL(blob);
       var form = new FormData();
       form.append("myfile", blob);
 
       var XHR = new XMLHttpRequest();
 
+     XHR.addEventListener('load', function(event) {
+        window.location.replace('crm');
+     });
 
       // Set up our request
       XHR.open('POST', 'new-image');
 
       // Send our FormData object; HTTP headers are set automatically
       XHR.send(form);
+
+
       }
     /*.catch((err) => {
       console.error("takePhoto() failed: ", err);
     });*/
     )
-  window.location.replace('crm')
+
   }

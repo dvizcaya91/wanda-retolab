@@ -64,12 +64,16 @@ def new_image(request):
     blob.upload_from_filename(pdf_name)
 
     print("Subio a storage")
-    result = process_result(async_detect_document('gs://wanda_vision_images/{}'.format(pdf_name), 'gs://wanda_vision_images/ignore_'))
+    try:
+        result = process_result(async_detect_document('gs://wanda_vision_images/{}'.format(pdf_name), 'gs://wanda_vision_images/ignore_'))
 
-    tran = Transaction(**result)
-    tran.save()
+        tran = Transaction(**result)
+        tran.save()
 
-    return JsonResponse({"success": True, "results":result})
+        return JsonResponse({"success": True, "results":result})
+    except Exception as e:
+        print(str(e))
+        return JsonResponse({"success": False})
 
 
 def populate_db(request):
