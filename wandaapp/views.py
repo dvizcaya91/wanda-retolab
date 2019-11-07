@@ -8,4 +8,7 @@ def index(request):
     return render(request, 'wandaapp/dashboard-finance.html', context)
 
 
-# Create your views here.
+def form(request):
+
+    context = {}
+    return render(request, 'wandaapp/form.html', context)
