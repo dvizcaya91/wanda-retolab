@@ -211,7 +211,7 @@ def crm(request):
     df = pd.DataFrame(list(Transaction.objects.all().values()))
     df['date'] = pd.to_datetime(df['date'])
     df = df.sort_values('date', ascending=False)
-    #trans = list(Transaction.objects.order_by("-date").all().values())
+    df['date'] = df['date'].dt.strftime('%Y-%m-%d')
     context["trans"] = df.to_dict(orient='records')
 
     return render(request, 'wandaapp/crm.html', context)
