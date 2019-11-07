@@ -216,7 +216,7 @@ a {
 }
 
 a:hover {
-    color: #ff407b;
+    color: #DE2176;
     text-decoration: none;
 }
 
@@ -251,6 +251,13 @@ label {
     color: #71748d;
 }
 
+.radio-title {
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #71748d;
+}
+
 .form-control {
     display: block;
     width: 100%;
@@ -261,6 +268,7 @@ label {
     background-image: none;
     border: 1px solid #d2d2e4;
     border-radius: 2px;
+    height: calc(2.25rem + 2px);
 }
 
 .form-control:focus {
@@ -328,6 +336,10 @@ textarea::-webkit-input-placeholder {
 
 textarea:focus::-webkit-input-placeholder {
     color: #5969ff !important;
+}
+
+.btn-align {
+    text-align: center;
 }
 
 button.btn {}
@@ -414,8 +426,8 @@ address {}
 }
 
 .custom-radio .custom-control-input:checked~.custom-control-label::before {
-    background-color: #5969ff;
-    border-color: #5969ff;
+    background-color: #DE2176;
+    border-color: #DE2176;
 }
 
 .custom-control-input:disabled~.custom-control-label::before {
@@ -2611,7 +2623,7 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 
 .btn {
     font-size: 14px;
-    padding: 9px 16px;
+    padding: 9px 60px;
     border-radius: 2px;
 }
 
@@ -2661,21 +2673,21 @@ clip-path: polygon(10% 25%, 10% 0, 35% 0%, 65% 0%, 90% 0, 90% 25%, 90% 50%, 91% 
 
 .btn-primary {
     color: #fff;
-    background-color: #5969ff;
-    border-color: #5969ff;
+    background-color: #df2176;
+    border-color: #df2176;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #4656e9;
-    border-color: #4656e9;
+    background-color: #AB1A5B;
+    border-color: #AB1A5B;
 }
 
 .btn-primary.focus,
 .btn-primary:focus {
     color: #fff;
-    background-color: #4656e9;
-    border-color: #4656e9;
+    background-color: #AB1A5B;
+    border-color: #AB1A5B;
     box-shadow: 0 0 0 1px rgb(37, 52, 158);
 }
 
