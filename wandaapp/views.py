@@ -7,6 +7,7 @@ from django.http import JsonResponse
 import img2pdf
 from google.cloud import storage
 from wandaapp.scripts.OCR_image import async_detect_document, process_result
+from wandaapp.scripts.generate_data import generate_data
 
 
 def index(request):
@@ -68,3 +69,8 @@ def new_image(request):
     tran.save()
 
     return JsonResponse({"success": True, "results":result})
+
+def populate_db(request):
+    generate_data(request, 3)
+
+    return JsonResponse({"success": True})
