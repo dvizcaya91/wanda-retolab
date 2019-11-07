@@ -54,17 +54,20 @@ def descriptive(request):
     companion_type = df.groupby(['companion_type']).aggregate({'user_id': 'count'}).reset_index()
     companion_type = companion_type.rename(columns={'companion_type':'label', 'user_id':'value'})
     companion_type = json.dumps(companion_type.to_dict(orient='records'))
+    companion_type = companion_type.replace('"value"','value').replace('"label"', 'label')
 
     # Average price
     average_price = df.groupby(['date']).aggregate({'price': 'sum'}).reset_index()
     average_price = average_price.to_dict()
     average_price_dict = {}
     average_price_dict['date'] = list(average_price['date'].values())
+    average_price_dict['date'] = [ i for i in average_price_dict['date'][:15]]
     average_price_dict['values'] = list(average_price['price'].values())
+    average_price_dict['values'] = [i for i in average_price_dict['values'][:15]]
     average_price_dict['average'] = [sum(average_price_dict['values'])/len(average_price_dict['values']) for i in average_price_dict['values']]
 
     context = {'tourist_qty':tourist_qty, 'tourist_summary':tourist_summary, 'products_bar_dict':products_bar_dict,
-               'category_bar_dict':category_bar_dict, 'companion_type':companion_type, 'average_price_dict':'average_price_dict'}
+               'category_bar_dict':category_bar_dict, 'companion_type':companion_type, 'average_price_dict':average_price_dict}
     return render(request, 'wandaapp/dashboard-finance.html', context)
 
 
