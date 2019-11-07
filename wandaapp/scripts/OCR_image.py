@@ -70,9 +70,11 @@ def async_detect_document(gcs_source_uri, gcs_destination_uri):
         annotation.text))
 
     # open('result_test.txt', 'w').write(annotation.text)
+    return annotation.text
 
 
 def process_result(text):
+    import re
     from difflib import get_close_matches
 
     #text = open('result_test.txt', 'r').read()
@@ -107,10 +109,22 @@ def process_result(text):
             elif get_close_matches(f, t.split(' ')):
                 results[key] = t.split(' ')[1:]
                 results[key] = ' '.join(results[key])
+
+    results['price'] = ''.join(re.findall('\d+', results['price']))
     print(results)
 
     return results
 
 if __name__ == '__main__':
     #async_detect_document('gs://wanda_vision_images/test_1.pdf', 'gs://wanda_vision_images/result')
-    process_result('a')
+    process_result('''Factura
+Fecha: 6/11/2019
+Producto: Paseo Tayrona
+Precio: 30000
+Ubicación: Magdalena
+Cédula: 1032 444591
+Geлeгo : H
+TIPO : Nacional
+Vlaga con: Familia
+Origen: Bogota
+    ''')
