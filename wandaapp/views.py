@@ -54,10 +54,10 @@ def predictive(request):
     model = ARIMA(tourist_qty, order=(1, 1, 0))
     model_fit = model.fit(disp=0)
     prediction = model_fit.predict(start=1, end=100)
+    labels = list(range(len(prediction)+len(tourist_qty)))
+    context = {'clusters':centers, 'tourism_qty':{'forecast':{'data':list(tourist_qty) + list(prediction), 'labels':labels},
+                                                  'old':{'data':list(tourist_qty), 'labels':labels}}}
 
-    context = {'clusters':centers, 'tourism_qty':{'forecast':{'data':list(prediction), 'labels':range(len(list(prediction)))},
-                                                  'old':{'data':list(tourist_qty), 'labels':range(len(list(prediction)), len(list(prediction)+list(tourist_qty)))}}}
-    print(context)
 
     return render(request, 'wandaapp/dashboard-predictive.html', context)
 
