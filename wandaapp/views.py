@@ -27,7 +27,11 @@ def transaction_model(request):
         trans = list(Transaction.objects.values())
         return JsonResponse({"transactions":trans})
 
-
+@csrf_exempt
 def form(request):
     context = {}
     return render(request, 'wandaapp/form.html', context)
+
+def crm(request):
+    context = {}
+    return render(request, 'wandaapp/crm.html', context)

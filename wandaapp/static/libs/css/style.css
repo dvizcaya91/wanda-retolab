@@ -6988,6 +6988,24 @@ Media Query
     padding: 17px 29px;}
 }
 
+.download-btns {
+    -ms-flex: 0 0 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    text-align: center;
+}
+
+.search-bar {
+    -ms-flex: 0 0 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin: 20px 0 10px 0;
+}
+
+.search-bar div {
+    text-align: center !important;
+}
+
 
 
 
