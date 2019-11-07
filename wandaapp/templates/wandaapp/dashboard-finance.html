@@ -445,13 +445,13 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h3 class="mb-2">Finance Dashboard </h3>
+                                <h3 class="mb-2">Análisis Descriptivo </h3>
                                 <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Finance Dashboard Template</li>
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Análisis</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Descriptivo</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -471,6 +471,39 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-8 col-sm-12 col-12">
+                            <div class="card">
+                                <h5 class="card-header">Cantidad de Turistas</h5>
+                                <div class="card-body">
+                                    <canvas id="revenue" width="400" height="150"></canvas>
+                                </div>
+                                <div class="card-body border-top">
+                                    <div class="row">
+                                        <div class="offset-xl-1 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+                                            <h4> Today's Earning: $2,800.30</h4>
+                                            <p>Suspendisse potenti. Done csit amet rutrum.
+                                            </p>
+                                        </div>
+                                        <div class="offset-xl-1 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 p-3">
+                                            <h2 class="font-weight-normal mb-3"><span>$48,325</span>                                                    </h2>
+                                            <div class="mb-0 mt-3 legend-item">
+                                                <span class="fa-xs text-primary mr-1 legend-title "><i class="fa fa-fw fa-square-full"></i></span>
+                                                <span class="legend-text">Current Week</span></div>
+                                        </div>
+                                        <div class="offset-xl-1 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 p-3">
+                                            <h2 class="font-weight-normal mb-3">
+
+                                                            <span>$59,567</span>
+                                                        </h2>
+                                            <div class="text-muted mb-0 mt-3 legend-item"> <span class="fa-xs text-secondary mr-1 legend-title"><i class="fa fa-fw fa-square-full"></i></span><span class="legend-text">Previous Week</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="card">
                                 <h5 class="card-header">Total Income</h5>
@@ -806,6 +839,7 @@
     <script src="{% static '/vendor/charts/sparkline/jquery.sparkline.js' %}"></script>
     <!-- dashboard finance js -->
     <script src="{% static '/libs/js/dashboard-finance.js' %}"></script>
+    <script src="{% static 'libs/js/dashboard-sales.js' %}"></script>
     <!-- main js -->
     <script src="{% static '/libs/js/main-js.js' %}"></script>
     <!-- gauge js -->
@@ -825,6 +859,79 @@
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
     });
+    </script>
+
+    <script>
+        $(function() {
+        "use strict";
+        // ==============================================================
+        // Revenue
+        // ==============================================================
+        var ctx = document.getElementById('revenue').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+
+                    data: {
+                        labels: {{ tourist_qty.date|safe }},
+                        datasets: [{
+                            label: 'Nacional',
+                            data: {{ tourist_qty.Nacional|safe }},
+                          backgroundColor: "rgba(89, 105, 255,0.5)",
+                                        borderColor: "rgba(89, 105, 255,0.7)",
+                                        borderWidth: 2
+
+                        }, {
+                            label: 'Internacional',
+                            data: {{ tourist_qty.Internacional|safe }},
+                              backgroundColor: "rgba(255, 64, 123,0.5)",
+                                        borderColor: "rgba(255, 64, 123,0.7)",
+                                        borderWidth: 2
+                        }]
+                    },
+                    options: {
+
+                                 legend: {
+                            display: true,
+                            position: 'bottom',
+
+                            labels: {
+                                fontColor: '#71748d',
+                                fontFamily: 'Circular Std Book',
+                                fontSize: 14,
+                            }
+                        },
+                        scales: {
+                yAxes: [{
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            return '$' + value;
+                        }
+                    }
+                }]
+            },
+
+
+             scales: {
+                                        xAxes: [{
+                                            ticks: {
+                                                fontSize: 14,
+                                                fontFamily: 'Circular Std Book',
+                                                fontColor: '#71748d',
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            ticks: {
+                                                fontSize: 14,
+                                                fontFamily: 'Circular Std Book',
+                                                fontColor: '#71748d',
+                                            }
+                                        }]
+                                    }
+
+                    }
+                });
+     });
     </script>
 </body>
 </html>

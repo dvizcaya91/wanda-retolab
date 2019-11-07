@@ -8,12 +8,38 @@ import img2pdf
 from google.cloud import storage
 from wandaapp.scripts.OCR_image import async_detect_document, process_result
 from wandaapp.scripts.generate_data import generate_data
+import pandas as pd
+from django.db.models.functions import Cast, TruncDate
+from django.db.models import DateTimeField, CharField
+
+def descriptive(request):
+
+    df = pd.DataFrame(list(Transaction.objects.all().values()))
+    #df['date'] = df['date'].dt.strftime('%Y-%m-%d')
+    df['date'] = df['date'].astype('str')
+    print(df)
+    print(df.dtypes)
+    tourist_qty = df.groupby(['date', 'type_of_traveler']).aggregate({'user_id': 'count'}).reset_index()
+    print(tourist_qty)
+    print(tourist_qty.dtypes)
+    tourist_qty = tourist_qty.pivot(index='date', columns='type_of_traveler', values='user_id').reset_index()
+    tourist_qty = tourist_qty.fillna(0)
+    print(tourist_qty)
+    tourist_qty = tourist_qty.to_dict()
+    print(tourist_qty)
+    tourist_qty['date'] = list(tourist_qty['date'].values())
+    tourist_qty['Internacional'] = list(tourist_qty['Internacional'].values())
+    tourist_qty['Nacional'] = list(tourist_qty['Nacional'].values())
+    print(tourist_qty)
+
+    context = {'tourist_qty':tourist_qty}
+    return render(request, 'wandaapp/dashboard-finance.html', context)
 
 
-def index(request):
+def sales(request):
 
     context = {}
-    return render(request, 'wandaapp/dashboard-finance.html', context)
+    return render(request, 'wandaapp/dashboard-sales.html', context)
 
 
 @csrf_exempt
@@ -77,7 +103,7 @@ def new_image(request):
 
 
 def populate_db(request):
-    generate_data(request, 3)
+    generate_data(request, 24)
 
     return JsonResponse({"success": True})
 

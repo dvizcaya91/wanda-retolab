@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 class Transaction(models.Model):
 
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     category = models.CharField(max_length=200, default=None, null=True)
     product = models.CharField(max_length=200, default=None, null=True)
     subsector = models.CharField(max_length=200, default=None, null=True)
