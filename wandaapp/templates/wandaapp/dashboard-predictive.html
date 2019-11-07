@@ -82,7 +82,7 @@
                                             <a class="nav-link" href="descriptive">Descriptivo</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="predictive">Predictivo<br>(Próximamente)</a>
+                                            <a class="nav-link" href="predictive">Predictivo</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Tendencias<br>(Próximamente)</a>
@@ -149,11 +149,11 @@
                                     <div class="text-center m-t-10">
                                         <span class="legend-item mr-3">
                                                 <span class="fa-xs text-primary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Nacionales</span>
+                                        <span class="legend-text">Predicción</span>
                                         </span>
                                         <span class="legend-item mr-3">
                                                 <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                        <span class="legend-text">Internacionales</span>
+                                        <span class="legend-text">Histórico</span>
                                         </span>
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@
             },
             axisY: {
                 labelInterpolationFnc: function(value) {
-                    return '$'+ (value / 1000);
+                    return value;
                 }
             },
 
