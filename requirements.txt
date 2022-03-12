@@ -16,7 +16,7 @@ joblib==0.14.0
 numpy==1.17.3
 pandas==0.25.3
 patsy==0.5.1
-Pillow==6.2.1
+Pillow==9.0.1
 protobuf==3.10.0
 pyasn1==0.4.7
 pyasn1-modules==0.2.7
