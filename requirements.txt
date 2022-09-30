@@ -12,7 +12,7 @@ googleapis-common-protos==1.6.0
 grpcio==1.25.0
 idna==2.8
 img2pdf==0.3.3
-joblib==0.14.0
+joblib==1.2.0
 numpy==1.17.3
 pandas==0.25.3
 patsy==0.5.1
